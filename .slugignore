@@ -1,2 +1,3 @@
 /__MACOSX/*
+/src/main/resources/*
 /target/*
