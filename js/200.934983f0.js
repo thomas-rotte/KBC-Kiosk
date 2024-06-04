@@ -708,6 +708,15 @@
                   e.fields.HTML) &&
                   (this.$refs.bg_video.pause(),
                   this.$nextTick(() => {
+
+                    if(e.fields["ID"] == "KBC2"){
+                        window.location.href = "schedule.html"
+                    }
+                    if(e.fields["ID"] == "KBC4"){
+                        window.location.href = "game.html"
+                    }
+
+
                     if (e.fields["3D_Content"]) {
                       if (e.fields["3D_Content"].includes("autodesk?"))
                         return void this.$router.push(e.fields["3D_Content"]);
