@@ -713,7 +713,7 @@
                         window.location.href = "schedule.html"
                     }
                     if(e.fields["ID"] == "KBC4"){
-                        window.location.href = "game.html"
+                        window.location.href = "slide-puzzle-master/index.html"
                     }
 
 
