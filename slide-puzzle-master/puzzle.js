@@ -1,16 +1,19 @@
 
-var rows = 3;
-var columns = 3;
+let rows = 3;
+let columns = 3;
 
-var currTile;
-var otherTile; //blank tile
+let currTile;
+let otherTile; //blank tile
 
-var turns = 0;
+let turns = 0;
 
-var imgOrder = ["1", "5", "3", "4", "2", "6", "7", "8", "9"];
+let imgOrder = ["1", "5", "3", "4", "2", "6", "7", "8", "9"];
 // var imgOrder = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
 
+let gameWindow;
+
 window.onload = function() {
+    gameWindow = document.getElementById('board')
     for (let r=0; r < rows; r++) {
         for (let c=0; c < columns; c++) {
 
@@ -20,17 +23,20 @@ window.onload = function() {
             tile.src = imgOrder.shift() + ".jpg";
 
             //DRAG FUNCTIONALITY
-            tile.addEventListener("dragstart", dragStart);  //click an image to drag
+            tile.addEventListener("touchstart", dragStart);  //click an image to drag
             tile.addEventListener("dragover", dragOver);    //moving image around while clicked
             tile.addEventListener("dragenter", dragEnter);  //dragging image onto another one
             tile.addEventListener("dragleave", dragLeave);  //dragged image leaving anohter image
-            tile.addEventListener("drop", dragDrop);        //drag an image over another image, drop the image
-            tile.addEventListener("dragend", dragEnd);      //after drag drop, swap the two tiles
-
-            document.getElementById("board").append(tile);
+            tile.addEventListener("touchend", dragDrop);        //drag an image over another image, drop the image
+                 //after drag drop, swap the two tiles
+            gameWindow.append(tile);
 
         }
     }
+}
+
+function getElementFromPoint(x,y){
+    return document.elementFromPoint(x,y)
 }
 
 function dragStart() {
@@ -49,8 +55,12 @@ function dragLeave() {
 
 }
 
-function dragDrop() {
-    otherTile = this; //this refers to the img tile being dropped on
+function dragDrop(e) {
+    const xCodrdinates = e.changedTouches[0].clientX;
+    const yCordinates = e.changedTouches[0].clientY;
+    otherTile = getElementFromPoint(xCodrdinates,yCordinates); //this refers to the img tile being dropped on
+    console.log(otherTile);
+    dragEnd()
 }
 
 function dragEnd() {
