@@ -44,7 +44,8 @@ body {
   }
 
   .banner {
-    width: 100vw;
+    margin-top: 20px;
+    width: 80vw;
   }
 
   .main-content {
@@ -58,7 +59,7 @@ body {
   }
 
   .back-arrow {
-    top: -300px;
+    top: -200px;
     left: 60px;
     width: 120px;
     position: absolute;
