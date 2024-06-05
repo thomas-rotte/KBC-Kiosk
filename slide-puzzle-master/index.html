@@ -6,6 +6,7 @@
     <title>Slide Puzzle</title>
     <link rel="stylesheet" href="puzzle.css" />
     <script src="puzzle.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   </head>
 
   <body>
@@ -13,14 +14,14 @@
         <img src="./assets/Puzzletitle.png" alt="banner" class="banner" />
       <div class="main-content">
         <a href="../index.html">
-            <img src="../img/action-func-chevron-left.png" alt="back-arrow" class="back-arrow">
+          <img src="../img/action-func-chevron-left.png" alt="back-arrow" class="back-arrow">
         </a>
+        <h1 id="turns-holder">Turns: <span id="turns">0</span></h1>
         <div id="board"></div>
         <div><button id="shuffle">
-          shuffle tiles
+          Restart
         </button></div>
       </div>
-      <h1>Turns: <span id="turns">0</span></h1>
     </div>
   </body>
 </html>

@@ -10,9 +10,26 @@ let gameWindow;
 
 let shuffleButton;
 
+let lastInteractedWith = Date.now();
+
+const start = Date.now();
+
+const timeOut = 120000;
+
+const chronJob = () => {
+  setTimeout(() => {
+    if (Date.now() - lastInteractedWith >= timeOut) {
+      window.location.replace("../index.html");
+    } else {
+      chronJob();
+    }
+  }, 5000);
+};
+
 window.onload = renderBoard;
 
 function renderBoard() {
+  chronJob();
   let imgOrder = ["1", "5", "3", "4", "2", "6", "7", "8", "9"];
   shuffleButton = document.getElementById("shuffle");
   gameWindow = document.getElementById("board");
@@ -21,10 +38,11 @@ function renderBoard() {
       //<img id="0-0" src="1.jpg">
       let tile = document.createElement("img");
       tile.id = r.toString() + "-" + c.toString();
-      tile.src = shuffle(imgOrder).shift() + ".jpg";
-      console.log(tile.src);
+      tile.src = shuffleArray(imgOrder).shift() + ".jpg";
+      // tile.src = imgOrder.shift() + ".jpg";
       //DRAG FUNCTIONALITY
       tile.addEventListener("touchstart", dragStart); //click an image to drag
+      tile.addEventListener("touchstart", interaction); //click an image to drag
       tile.addEventListener("dragover", dragOver); //moving image around while clicked
       tile.addEventListener("dragenter", dragEnter); //dragging image onto another one
       tile.addEventListener("dragleave", dragLeave); //dragged image leaving anohter image
@@ -36,7 +54,11 @@ function renderBoard() {
   }
 }
 
-const shuffle = (array) => {
+const interaction = () => {
+  lastInteractedWith = Date.now();
+};
+
+const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
@@ -119,5 +141,8 @@ function dragEnd() {
     turns += 1;
     document.getElementById("turns").innerText = turns;
   }
-  isComplete();
+
+  if (isComplete()) {
+    document.getElementById("1-1").src = "5-1.jpg";
+  }
 }

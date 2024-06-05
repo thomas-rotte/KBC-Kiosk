@@ -85,3 +85,8 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.call-to-action{
+  margin-top: 150px;
+  font-size: 50px;
+}
