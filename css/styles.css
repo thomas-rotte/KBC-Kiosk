@@ -5,6 +5,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   margin: 0;
+  font-family: sans-serif;
+
 }
 .layout {
   width: 100vw;
@@ -72,7 +74,7 @@ body {
 }
 
 .back-arrow {
-  top: -400px;
+  top: -200px;
   left: 60px;
   width: 120px;
   position: absolute;
@@ -89,4 +91,9 @@ body {
 .call-to-action{
   margin-top: 150px;
   font-size: 50px;
+}
+
+.negative-left-margin{
+  margin-left: -100px;
+  margin-bottom: 150px;
 }

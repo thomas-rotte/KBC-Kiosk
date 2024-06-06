@@ -2,7 +2,7 @@ let rows = 3;
 let columns = 3;
 
 let currTile;
-let otherTile; //blank tile
+let otherTile;
 
 let turns = 0;
 
@@ -12,9 +12,19 @@ let shuffleButton;
 
 let lastInteractedWith = Date.now();
 
+const fiftyVariants = [];
+
 const start = Date.now();
 
 const timeOut = 120000;
+
+const initialize = () => {
+  turns = 0;
+  generateVariants();
+  chronJob();
+  renderBoard();
+};
+window.onload = initialize;
 
 const chronJob = () => {
   setTimeout(() => {
@@ -26,57 +36,101 @@ const chronJob = () => {
   }, 5000);
 };
 
-window.onload = renderBoard;
-
-function renderBoard() {
-  chronJob();
-  let imgOrder = ["1", "5", "3", "4", "2", "6", "7", "8", "9"];
+const renderBoard = () => {
+  const variant = [...getVariant(fiftyVariants)];
+  // const formatedVariant = [...variant[0], ...variant[1] ,...variant[2]]
+  const formatedVariant = [1, 0, 3, 4, 2, 6, 7, 8, 9];
   shuffleButton = document.getElementById("shuffle");
   gameWindow = document.getElementById("board");
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
-      //<img id="0-0" src="1.jpg">
       let tile = document.createElement("img");
       tile.id = r.toString() + "-" + c.toString();
-      tile.src = shuffleArray(imgOrder).shift() + ".jpg";
-      // tile.src = imgOrder.shift() + ".jpg";
-      //DRAG FUNCTIONALITY
-      tile.addEventListener("touchstart", dragStart); //click an image to drag
-      tile.addEventListener("touchstart", interaction); //click an image to drag
-      tile.addEventListener("dragover", dragOver); //moving image around while clicked
-      tile.addEventListener("dragenter", dragEnter); //dragging image onto another one
-      tile.addEventListener("dragleave", dragLeave); //dragged image leaving anohter image
-      tile.addEventListener("touchend", dragDrop); //drag an image over another image, drop the image
+      tile.src = formatedVariant.shift() + ".jpg";
+
+      tile.addEventListener("touchstart", dragStart);
+      tile.addEventListener("touchstart", interaction);
+      tile.addEventListener("dragover", dragOver);
+      tile.addEventListener("dragenter", dragEnter);
+      tile.addEventListener("dragleave", dragLeave);
+      tile.addEventListener("touchend", dragDrop);
       shuffleButton.addEventListener("click", shuffleTiles);
-      //after drag drop, swap the two tiles
+
       gameWindow.append(tile);
     }
   }
-}
+};
 
 const interaction = () => {
   lastInteractedWith = Date.now();
 };
 
-const shuffleArray = (array) => {
+const isSolvable = (array) => {
+  let inv_count = 0;
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] > array[j]) inv_count++;
+    }
+  }
+  return inv_count % 2 === 0;
+};
+
+const isSolvableV2 = (array) => {
+  let inv_count = 0;
+  for (let i = 0; i < 2; i++) {
+    for (let j = i + 1; j < 3; j++) {
+      if (array[j][i] > 0 && array[j][i] > array[i][j]) inv_count += 1;
+    }
+  }
+  return inv_count % 2 === 0;
+};
+
+const shuffleArray = () => {
+  const array = [1, 2, 3, 4, 0, 6, 7, 8, 9];
+  const formatedArray = [];
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  return array;
+  formatedArray.push(
+    [array[0], array[1], array[2]],
+    [array[3], array[4], array[5]],
+    [array[6], array[7], array[8]]
+  );
+  return formatedArray;
+};
+
+const generateVariants = () => {
+  while (fiftyVariants.length < 50) {
+    const currentArray = shuffleArray();
+    if (isSolvableV2(currentArray)) {
+      fiftyVariants.push(currentArray);
+    }
+  }
+};
+
+const getVariant = (array) => {
+  const variant = Math.floor(Math.random() * array.length);
+  return array[variant];
 };
 
 function shuffleTiles() {
   gameWindow.innerHTML = "";
+  document.getElementById("turns").innerText = "0";
   renderBoard();
 }
 
 function isComplete() {
   const tiles = gameWindow.children;
+  console.log(tiles.length);
   let currentPoint = 1;
   for (let i = 0; i < tiles.length; i++) {
     const element = tiles[i];
     const tileNumber = element.attributes.src.nodeValue;
+    if (currentPoint === 5) {
+      !tileNumber.includes(0 + ".jpg");
+      continue;
+    }
     if (!tileNumber.includes(currentPoint + ".jpg")) {
       return false;
     }
@@ -90,7 +144,7 @@ function getElementFromPoint(x, y) {
 }
 
 function dragStart() {
-  currTile = this; //this refers to the img tile being dragged
+  currTile = this;
 }
 
 function dragOver(e) {
@@ -106,16 +160,16 @@ function dragLeave() {}
 function dragDrop(e) {
   const xCodrdinates = e.changedTouches[0].clientX;
   const yCordinates = e.changedTouches[0].clientY;
-  otherTile = getElementFromPoint(xCodrdinates, yCordinates); //this refers to the img tile being dropped on
+  otherTile = getElementFromPoint(xCodrdinates, yCordinates);
   dragEnd();
 }
 
 function dragEnd() {
-  if (!otherTile.src.includes("5.jpg")) {
+  if (!otherTile.src.includes("0.jpg")) {
     return;
   }
 
-  let currCoords = currTile.id.split("-"); //ex) "0-0" -> ["0", "0"]
+  let currCoords = currTile.id.split("-");
   let r = parseInt(currCoords[0]);
   let c = parseInt(currCoords[1]);
 
@@ -141,7 +195,7 @@ function dragEnd() {
     turns += 1;
     document.getElementById("turns").innerText = turns;
   }
-
+  console.log(isComplete());
   if (isComplete()) {
     document.getElementById("1-1").src = "5-1.jpg";
   }

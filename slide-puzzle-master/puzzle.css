@@ -10,8 +10,8 @@ body {
 }
 
 #board {
-    width: 936px;
-    height: 936px;
+    width: 932.4px;
+    height: 933px;
     background-color: lightblue;
     border: 10px solid #0097db;
 
@@ -23,7 +23,7 @@ body {
 #board img {
     width: 306.8px;
     height: 306.8px;
-    border: 1px solid #0097db;
+    border: 2.6px solid #0097db;
 }
 
 body {
@@ -45,7 +45,7 @@ body {
 
   .banner {
     margin-top: 20px;
-    width: 80vw;
+    width: 60vw;
   }
 
   .main-content {
