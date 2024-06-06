@@ -38,8 +38,8 @@ const chronJob = () => {
 
 const renderBoard = () => {
   const variant = [...getVariant(fiftyVariants)];
-  // const formatedVariant = [...variant[0], ...variant[1] ,...variant[2]]
-  const formatedVariant = [1, 0, 3, 4, 2, 6, 7, 8, 9];
+  const formatedVariant = [...variant[0], ...variant[1] ,...variant[2]]
+  // const formatedVariant = [1, 0, 3, 4, 2, 6, 7, 8, 9];
   shuffleButton = document.getElementById("shuffle");
   gameWindow = document.getElementById("board");
   for (let r = 0; r < rows; r++) {
