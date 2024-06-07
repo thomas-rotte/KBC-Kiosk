@@ -676,7 +676,7 @@
       },
       3342: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "media/KBC-Dance.6bd71aec.mp4";
+        e.exports = n.p + "media/M24119_TED_Karin_01_SUBSCRIBE_Magazine_-100.mp4";
       },
       4721: function (e, t, n) {
         "use strict";
@@ -684,15 +684,15 @@
       },
       593: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "img/Dragon.dfa32dbe.png";
+        e.exports = n.p + "img/M24119_TED_Karin_01_SUBSCRIBE_Magazine.png";
       },
       1279: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "img/KBC-Animation.5c5cbf31.png";
+        e.exports = n.p + "img/playgrey.png";
       },
       5367: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "img/KBC-Dance.718e0c19.png";
+        e.exports = n.p + "img/M24119_TED_Karin_01_CLEAN.png";
       },
       6627: function (e, t, n) {
         "use strict";
