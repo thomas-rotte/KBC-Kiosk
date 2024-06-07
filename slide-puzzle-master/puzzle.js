@@ -19,11 +19,12 @@ const start = Date.now();
 const timeOut = 120000;
 
 const initialize = () => {
-  turns = 0;
+  addPreventZoomEventListener();
   generateVariants();
   chronJob();
   renderBoard();
 };
+
 window.onload = initialize;
 
 const chronJob = () => {
@@ -37,8 +38,9 @@ const chronJob = () => {
 };
 
 const renderBoard = () => {
+  turns = 0;
   const variant = [...getVariant(fiftyVariants)];
-  const formatedVariant = [...variant[0], ...variant[1] ,...variant[2]]
+  const formatedVariant = [...variant[0], ...variant[1], ...variant[2]];
   // const formatedVariant = [1, 0, 3, 4, 2, 6, 7, 8, 9];
   shuffleButton = document.getElementById("shuffle");
   gameWindow = document.getElementById("board");
@@ -63,16 +65,6 @@ const renderBoard = () => {
 
 const interaction = () => {
   lastInteractedWith = Date.now();
-};
-
-const isSolvable = (array) => {
-  let inv_count = 0;
-  for (let i = 0; i < array.length; i++) {
-    for (let j = i + 1; j < array.length; j++) {
-      if (array[i] > array[j]) inv_count++;
-    }
-  }
-  return inv_count % 2 === 0;
 };
 
 const isSolvableV2 = (array) => {
@@ -122,7 +114,6 @@ function shuffleTiles() {
 
 function isComplete() {
   const tiles = gameWindow.children;
-  console.log(tiles.length);
   let currentPoint = 1;
   for (let i = 0; i < tiles.length; i++) {
     const element = tiles[i];
@@ -143,7 +134,22 @@ function getElementFromPoint(x, y) {
   return document.elementFromPoint(x, y);
 }
 
-function dragStart() {
+const addPreventZoomEventListener = () => {
+  const body = document.body;
+  body.addEventListener("touchstart", preventZoom);
+  body.addEventListener("touchmove", preventZoom);
+  body.addEventListener("dragenter", preventZoom);
+  body.addEventListener("dragleave", preventZoom);
+  body.addEventListener("touchend", preventZoom);
+};
+
+const preventZoom = (e) => {
+  document.body.style.zoom = 1;
+};
+
+function dragStart(e) {
+  e.preventDefault();
+  document.body.style.zoom = 1;
   currTile = this;
 }
 
@@ -195,7 +201,6 @@ function dragEnd() {
     turns += 1;
     document.getElementById("turns").innerText = turns;
   }
-  console.log(isComplete());
   if (isComplete()) {
     document.getElementById("1-1").src = "5-1.jpg";
   }
