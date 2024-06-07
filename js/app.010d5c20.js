@@ -688,7 +688,7 @@
       },
       1279: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "img/Build_tumb_1.png";
+        e.exports = n.p + "img/play.png";
       },
       5367: function (e, t, n) {
         "use strict";
