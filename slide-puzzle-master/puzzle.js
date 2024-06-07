@@ -23,6 +23,7 @@ const initialize = () => {
   generateVariants();
   chronJob();
   renderBoard();
+  isComplete();
 };
 
 window.onload = initialize;
@@ -40,15 +41,15 @@ const chronJob = () => {
 const renderBoard = () => {
   turns = 0;
   const variant = [...getVariant(fiftyVariants)];
-  const formatedVariant = [...variant[0], ...variant[1], ...variant[2]];
-  // const formatedVariant = [1, 0, 3, 4, 2, 6, 7, 8, 9];
+  // const formatedVariant = [...variant[0], ...variant[1], ...variant[2]];
+  // const formatedVariant = [1, 0, 3, 4, 2, 6, 7, 9, 8];
   shuffleButton = document.getElementById("shuffle");
   gameWindow = document.getElementById("board");
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       let tile = document.createElement("img");
       tile.id = r.toString() + "-" + c.toString();
-      tile.src = formatedVariant.shift() + ".jpg";
+      tile.src = variant.shift() + ".jpg";
 
       tile.addEventListener("touchstart", dragStart);
       tile.addEventListener("touchstart", interaction);
@@ -65,6 +66,19 @@ const renderBoard = () => {
 
 const interaction = () => {
   lastInteractedWith = Date.now();
+};
+
+const isSolvable = (array) => {
+  let inv_count = 0;
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] === 0) {
+        continue;
+      }
+      if (array[i] > array[j]) inv_count++;
+    }
+  }
+  return inv_count % 2 === 0;
 };
 
 const isSolvableV2 = (array) => {
@@ -89,13 +103,13 @@ const shuffleArray = () => {
     [array[3], array[4], array[5]],
     [array[6], array[7], array[8]]
   );
-  return formatedArray;
+  return array;
 };
 
 const generateVariants = () => {
   while (fiftyVariants.length < 50) {
     const currentArray = shuffleArray();
-    if (isSolvableV2(currentArray)) {
+    if (isSolvable(currentArray)) {
       fiftyVariants.push(currentArray);
     }
   }
@@ -119,7 +133,10 @@ function isComplete() {
     const element = tiles[i];
     const tileNumber = element.attributes.src.nodeValue;
     if (currentPoint === 5) {
-      !tileNumber.includes(0 + ".jpg");
+      if (!tileNumber.includes(0 + ".jpg")) {
+        return false;
+      }
+      currentPoint++;
       continue;
     }
     if (!tileNumber.includes(currentPoint + ".jpg")) {
