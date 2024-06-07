@@ -268,7 +268,7 @@
     },
     1119: function (e, t, i) {
       "use strict";
-      e.exports = i.p + "media/M24119 TED Karin 00 SCREENSAVER_-100.mp4";
+      e.exports = i.p + "media/M24119_TED_Karin_00_SCREENSAVER_-100.mp4";
     },
   },
 ]);

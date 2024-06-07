@@ -973,11 +973,11 @@
     },
     4230: function (e, t, i) {
       "use strict";
-      e.exports = i.p + "media/M24119 TED Karin 00 BACKGROUND MENU_-100.mp4";
+      e.exports = i.p + "media/M24119_TED_Karin_00_BACKGROUND_MENU_-100.mp4";
     },
     56: function (e, t, i) {
       "use strict";
-      e.exports = i.p + "media/M24119 TED Karin 00 BACKGROUND MENU_-100.mp4";
+      e.exports = i.p + "media/M24119_TED_Karin_00_BACKGROUND_MENU_-100.mp4";
     },
   },
 ]);

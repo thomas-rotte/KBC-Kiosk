@@ -676,7 +676,7 @@
       },
       3342: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "media/M24119 TED Karin 01 SUBSCRIBE_Magazine_-100.mp4";
+        e.exports = n.p + "media/M24119_TED_Karin_01_SUBSCRIBE_Magazine_-100.mp4";
       },
       4721: function (e, t, n) {
         "use strict";
@@ -684,15 +684,15 @@
       },
       593: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "img/M24119 TED Karin 01 SUBSCRIBE_Magazine.png";
+        e.exports = n.p + "img/M24119_TED_Karin_01_SUBSCRIBE_Magazine.png";
       },
       1279: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "img/Build_tumb.png";
+        e.exports = n.p + "img/Build_tumb_1.png";
       },
       5367: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "img/M24119 TED Karin 01 CLEAN.png";
+        e.exports = n.p + "img/M24119_TED_Karin_01_CLEAN.png";
       },
       6627: function (e, t, n) {
         "use strict";
