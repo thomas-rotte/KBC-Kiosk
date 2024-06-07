@@ -688,7 +688,7 @@
       },
       1279: function (e, t, n) {
         "use strict";
-        e.exports = n.p + "img/play.png";
+        e.exports = n.p + "img/playgrey.png";
       },
       5367: function (e, t, n) {
         "use strict";
