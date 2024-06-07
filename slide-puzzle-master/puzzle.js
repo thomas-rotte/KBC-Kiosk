@@ -19,7 +19,6 @@ const start = Date.now();
 const timeOut = 120000;
 
 const initialize = () => {
-  addPreventZoomEventListener();
   generateVariants();
   chronJob();
   renderBoard();

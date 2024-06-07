@@ -14,6 +14,5 @@ const addPreventZoomEventListener = () => {
 };
 
 const preventZoom = () => {
-  console.log("event");
   document.body.style.zoom = 1;
 };
