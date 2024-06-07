@@ -81,28 +81,12 @@ const isSolvable = (array) => {
   return inv_count % 2 === 0;
 };
 
-const isSolvableV2 = (array) => {
-  let inv_count = 0;
-  for (let i = 0; i < 2; i++) {
-    for (let j = i + 1; j < 3; j++) {
-      if (array[j][i] > 0 && array[j][i] > array[i][j]) inv_count += 1;
-    }
-  }
-  return inv_count % 2 === 0;
-};
-
 const shuffleArray = () => {
   const array = [1, 2, 3, 4, 0, 6, 7, 8, 9];
-  const formatedArray = [];
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  formatedArray.push(
-    [array[0], array[1], array[2]],
-    [array[3], array[4], array[5]],
-    [array[6], array[7], array[8]]
-  );
   return array;
 };
 
@@ -155,12 +139,11 @@ const addPreventZoomEventListener = () => {
   const body = document.body;
   body.addEventListener("touchstart", preventZoom);
   body.addEventListener("touchmove", preventZoom);
-  body.addEventListener("dragenter", preventZoom);
-  body.addEventListener("dragleave", preventZoom);
   body.addEventListener("touchend", preventZoom);
 };
 
-const preventZoom = () => {
+const preventZoom = (e) => {
+  e.preventDefault()
   document.body.style.zoom = 1;
 };
 
