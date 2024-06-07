@@ -143,7 +143,7 @@ const addPreventZoomEventListener = () => {
   body.addEventListener("touchend", preventZoom);
 };
 
-const preventZoom = (e) => {
+const preventZoom = () => {
   document.body.style.zoom = 1;
 };
 

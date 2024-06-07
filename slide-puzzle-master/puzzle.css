@@ -1,3 +1,8 @@
+html {
+  -ms-content-zooming: none;
+  touch-action: none;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
