@@ -710,9 +710,6 @@
                   this.$nextTick(() => {
 
                     if(e.fields["ID"] == "KBC2"){
-                        window.location.href = "schedule.html"
-                    }
-                    if(e.fields["ID"] == "KBC4"){
                         window.location.href = "slide-puzzle-master/index.html"
                     }
 
