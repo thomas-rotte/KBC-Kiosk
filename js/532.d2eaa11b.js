@@ -42,7 +42,7 @@
                             loop: e.loopScreensaverVideo,
                           },
                           domProps: {
-                            muted: e.$settings.Screensaver_Vids_Muted,
+                            muted: false,
                           },
                         },
                         [
