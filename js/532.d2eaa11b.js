@@ -217,7 +217,7 @@
                 clearTimeout(this.timeout),
                   this.resetAnalytics(),
                   window.location.reload();
-              }, 6e4));
+              }, 150000 ));
           },
           created() {},
         },
